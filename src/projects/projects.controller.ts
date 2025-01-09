@@ -4,6 +4,6 @@ import { Controller, Get } from '@nestjs/common';
 export class ProjectsController {
     @Get()
     getProjects()  {
-        return {code:200};
+        return {code:"ok"};
     }
 }
