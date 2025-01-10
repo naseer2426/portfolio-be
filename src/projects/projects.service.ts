@@ -21,7 +21,6 @@ export class ProjectsService {
         });
     }
 
-    @Cron(CronExpression.EVERY_MINUTE)
     async refreshProjectsRedis() {
         const projects = await this.fetchPortfolioReadyProjects();
         if (projects.error) {
