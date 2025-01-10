@@ -6,3 +6,8 @@ export type Project = {
     githubLink: string;
     tags?: string[];
 }
+
+export type FetchProjectsResp = {
+    data?: Project[];
+    error?: string;
+}
