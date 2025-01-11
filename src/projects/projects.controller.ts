@@ -7,18 +7,18 @@ export class ProjectsController {
     constructor(
         private readonly projectsService: ProjectsService
     ) {}
-    @Get('cache')
-    async getProjectsUsingCache()  {
-        const projects = await this.projectsService.getProjectsFromRedis();
-        if (!projects) {
-            const githubProjects = await this.projectsService.fetchPortfolioReadyProjects();
-            if (githubProjects.error) {
-                return { error: githubProjects.error };
-            }
-            return { data: githubProjects.data };
-        }
-        return { data: projects };
-    }
+    // @Get('cache')
+    // async getProjectsUsingCache()  {
+    //     const projects = await this.projectsService.getProjectsFromRedis();
+    //     if (!projects) {
+    //         const githubProjects = await this.projectsService.fetchPortfolioReadyProjects();
+    //         if (githubProjects.error) {
+    //             return { error: githubProjects.error };
+    //         }
+    //         return { data: githubProjects.data };
+    //     }
+    //     return { data: projects };
+    // }
     @Get()
     async getProjects() {
         const githubProjects = await this.projectsService.fetchPortfolioReadyProjects();
@@ -27,9 +27,9 @@ export class ProjectsController {
         }
         return { data: githubProjects.data };
     }
-    @Post('refresh')
-    async refreshProjects() {
-        await this.projectsService.refreshProjectsRedis();
-        return { message: 'Projects refreshed' };
-    }
+    // @Post('refresh')
+    // async refreshProjects() {
+    //     await this.projectsService.refreshProjectsRedis();
+    //     return { message: 'Projects refreshed' };
+    // }
 }

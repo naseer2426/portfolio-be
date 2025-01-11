@@ -14,31 +14,31 @@ export class ProjectsService {
     private readonly octokit:Octokit
     constructor(
         private readonly configService: ConfigService,
-        @InjectRedis() private readonly redis: Redis
+        // @InjectRedis() private readonly redis: Redis
     ) {
         this.octokit = new Octokit({
             auth: this.configService.get<string>('GITHUB_TOKEN'),
         });
     }
 
-    async refreshProjectsRedis() {
-        const projects = await this.fetchPortfolioReadyProjects();
-        if (projects.error) {
-            console.error(projects.error);
-            return;
-        }
-        await this.setProjectsToRedis(projects.data);
-        console.log('Projects refreshed');
-    }
+    // async refreshProjectsRedis() {
+    //     const projects = await this.fetchPortfolioReadyProjects();
+    //     if (projects.error) {
+    //         console.error(projects.error);
+    //         return;
+    //     }
+    //     await this.setProjectsToRedis(projects.data);
+    //     console.log('Projects refreshed');
+    // }
 
-    async setProjectsToRedis(projects:Project[]) {
-        await this.redis.set('projects', JSON.stringify(projects));
-    }
+    // async setProjectsToRedis(projects:Project[]) {
+    //     await this.redis.set('projects', JSON.stringify(projects));
+    // }
 
-    async getProjectsFromRedis():Promise<Project[]> {
-        const projects = await this.redis.get('projects');
-        return JSON.parse(projects);
-    }
+    // async getProjectsFromRedis():Promise<Project[]> {
+    //     const projects = await this.redis.get('projects');
+    //     return JSON.parse(projects);
+    // }
 
     async fetchPortfolioReadyProjects():Promise<FetchProjectsResp> {
         try {
