@@ -13,14 +13,14 @@ import { RedisModule } from '@nestjs-modules/ioredis';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    // RedisModule.forRootAsync({
-    //   imports: [ConfigModule],
-    //   inject: [ConfigService],
-    //   useFactory: async (configService: ConfigService) => ({
-    //     type: 'single',
-    //     url: configService.get<string>('REDIS_URL'),
-    //   }),
-    // }),
+    RedisModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        type: 'single',
+        url: configService.get<string>('REDIS_URL'),
+      }),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
