@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { Project,FetchProjectsResp } from './projects.entity';
 import { ConfigService } from '@nestjs/config';
-import { Octokit } from '@octokit/rest';
+// import { Octokit } from '@octokit/rest';
 import * as emoji from 'node-emoji'
 import { InjectRedis } from '@nestjs-modules/ioredis';
 import Redis from 'ioredis';
