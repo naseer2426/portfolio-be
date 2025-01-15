@@ -6,6 +6,8 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { ConfigModule } from '@nestjs/config';
 import { ConfigService } from '@nestjs/config';
 import { RedisModule } from '@nestjs-modules/ioredis';
+import { PingerService } from './pinger/pinger.service';
+import { PingerModule } from './pinger/pinger.module';
 @Module({
   imports: [
     ProjectsModule,
@@ -21,6 +23,7 @@ import { RedisModule } from '@nestjs-modules/ioredis';
         url: configService.get<string>('REDIS_URL'),
       }),
     }),
+    PingerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

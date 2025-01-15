@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Cron, CronExpression } from '@nestjs/schedule';
 import { Project,FetchProjectsResp } from './projects.entity';
 import { ConfigService } from '@nestjs/config';
 import { Octokit } from '@octokit/rest';
