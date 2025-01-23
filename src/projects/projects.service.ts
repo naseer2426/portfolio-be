@@ -5,6 +5,7 @@ import { Octokit } from '@octokit/rest';
 import * as emoji from 'node-emoji'
 import { InjectRedis } from '@nestjs-modules/ioredis';
 import Redis from 'ioredis';
+import { Cron } from '@nestjs/schedule';
 
 const USERNAME = 'naseer2426';
 const PORTFOLIO_READY_TOPIC = 'portfolio-ready';
@@ -18,6 +19,17 @@ export class ProjectsService {
         this.octokit = new Octokit({
             auth: this.configService.get<string>('GITHUB_TOKEN'),
         });
+    }
+
+    @Cron('0 0 * * * *') // Run every hour
+    async refreshProjectsCron() {
+        console.log('Starting scheduled project cache refresh...');
+        try {
+            await this.refreshProjectsRedis();
+            console.log('Successfully refreshed projects cache');
+        } catch (error) {
+            console.error('Failed to refresh projects cache:', error);
+        }
     }
 
     async refreshProjectsRedis() {
